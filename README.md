@@ -1,8 +1,6 @@
-##################################################
-# Instructions to simulate the LIF network model #
-##################################################
+# Instructions to simulate the LIF network model 
 
-## Building the neuron model ##
+## Building the neuron model 
 
 Instructions to compile the neuron model in NEST are based on the tutorial about “Writing an extension module” (https://nest.github.io/nest-simulator/extension_modules). 
 
