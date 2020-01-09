@@ -8,9 +8,9 @@ Instructions to compile the neuron model in NEST are based on the tutorial about
 
 export NEST_INSTALL_DIR=/Users/pablo/NEST/ins
 
-2 - Create a build directory in the folder 'neuron_model_Cavallari_et_al_2014':
+2 - Create a build directory in the folder 'neuron_model':
 
-cd neuron_model_Cavallari_et_al_2014
+cd neuron_model
 mkdir build
 cd build
 
@@ -30,8 +30,8 @@ export LD_LIBRARY_PATH=${NEST_INSTALL_DIR}/lib/python2.7/site-packages/nest:$LD_
 
 
 
-## Running a simulation ##
+## Running a simulation 
 
-Simulation scripts are in folder 'network_Cavallari_et_al_2014/analysis'. Adjust the simulation parameters in the script and execute it using the Python interpreter, e.g.:
+Simulation scripts are in folder 'network/analysis'. Adjust the simulation parameters in the script and execute it using the Python interpreter, e.g.:
 
-python firing_rate.py
+python save_results_1.py
