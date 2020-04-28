@@ -41,7 +41,6 @@ set( MODULE_NAME ${SHORT_NAME}module )
 set( MODULE_SOURCES
     mymodule.h mymodule.cpp
     iaf_bw_2003.h iaf_bw_2003.cpp
-    iaf_bw_2003_fr_adaptation_NMDA.h iaf_bw_2003_fr_adaptation_NMDA.cpp
     )
 
 # 3) We require a header name like this:

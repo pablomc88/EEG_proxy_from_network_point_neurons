@@ -27,7 +27,6 @@
 
 // include headers with your own stuff
 #include "iaf_bw_2003.h"
-#include "iaf_bw_2003_fr_adaptation_NMDA.h"
 
 // Includes from nestkernel:
 #include "connection_manager_impl.h"
@@ -112,9 +111,5 @@ mynest::MyModule::init( SLIInterpreter* i )
   */
   nest::kernel().model_manager.register_node_model< iaf_bw_2003 >(
     "iaf_bw_2003" );
-
-  nest::kernel().model_manager.register_node_model< iaf_bw_2003_fr_adaptation_NMDA >(
-    "iaf_bw_2003_fr_adaptation_NMDA" );
-
 
 } // MyModule::init()
