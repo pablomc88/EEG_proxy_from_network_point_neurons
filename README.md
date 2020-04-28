@@ -21,6 +21,7 @@ cmake -Dwith-nest=${NEST_INSTALL_DIR}/bin/nest-config ..
 4 - Compile:
 
 make
+
 make install
 
 It might be also necessary to update the LD_LIBRARY_PATH, e.g.:
