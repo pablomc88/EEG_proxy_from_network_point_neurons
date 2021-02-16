@@ -1,14 +1,20 @@
 # -*- coding: utf-8 -*-
 
-"""
-Recurrent neural network as described in [1] with conductance-based synapses. External
-inputs to each cell are assumed to arise from 1600 external synapses of the AMPA type
-(800 are from thalamocortical afferents, and 800 are from cortical-cortical afferents).
+###############################################################################
+## Recurrent neural network as described in [1] with conductance-based       ##
+## synapses. External inputs to each cell are assumed to arise from 1600     ##
+## external synapses of the AMPA type (800 are from thalamocortical          ##
+## afferents, and 800 are from cortical-cortical afferents).                 ##
+##                                                                           ##
+## [1] Cavallari, S., Panzeri, S., & Mazzoni, A. (2014). Comparison of the   ##
+## dynamics of neural interactions between current-based and conductance-    ##
+## based integrate-and-fire recurrent networks. Frontiers in neural          ##
+## circuits, 8, 12.                                                          ##
+##                                                                           ##
+## Author: Pablo Martinez Canada (pablo.martinez@iit.it)                     ##
+## Date: 15/02/2021                                                          ##
+###############################################################################
 
-[1] Cavallari, S., Panzeri, S., & Mazzoni, A. (2014). Comparison of the dynamics
-of neural interactions between current-based and conductance-based integrate-and-fire
-recurrent networks. Frontiers in neural circuits, 8, 12.
-"""
 
 import nest
 import nest.topology as tp

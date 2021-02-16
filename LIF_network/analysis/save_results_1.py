@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 
-"""
-Simulate network_1 and save results to file.
-"""
+###############################################################################
+## Simulate network_1 and save results to file.                              ##
+##                                                                           ##
+## Author: Pablo Martinez Canada (pablo.martinez@iit.it)                     ##
+## Date: 15/02/2021                                                          ##
+###############################################################################
+
+
 import nest
 import numpy as np
 import pandas as pd
@@ -36,8 +41,8 @@ Network_params = {
     "extent": 1.0,
     "exc_exc_recurrent": 0.178*weight_factor,
     "exc_inh_recurrent": 0.233*weight_factor,
-    "inh_inh_recurrent": -2.70*weight_factor/2.,
-    "inh_exc_recurrent": -2.01*weight_factor/2.,
+    "inh_inh_recurrent": -2.70*weight_factor,
+    "inh_exc_recurrent": -2.01*weight_factor,
     "th_exc_external": 0.234*weight_factor,
     "th_inh_external": 0.317*weight_factor,
     "cc_exc_external": 0.187*weight_factor,
@@ -81,14 +86,14 @@ inhibitory_cell_params  = {
 Neuron_params = [excitatory_cell_params,inhibitory_cell_params]
 
 Simulation_params = {
-    "experiment_id": "sim_0_ginh_2",
-    "simtime": 3000.0,
-    "simstep": 0.05,
-    "siminterval": 3000.0,
+    "experiment_id": "test",
+    "simtime": 1000.0,
+    "simstep": 1.0,
+    "siminterval": 1000.0,
     "trials": 1,
-    "num_threads": 40,
-    "toMemory" : False,
-    "decimate": True,
+    "num_threads": 8,
+    "toMemory" : True,
+    "decimate": False,
     "computeMP": False
 }
 
@@ -112,7 +117,8 @@ Analysis_params = {
 #! ===========
 
 # External input rates
-ext_rates = np.arange(1.5,10.5,0.5) # (spikes/s)
+# ext_rates = np.arange(1.5,10.5,0.5) # (spikes/s)
+ext_rates = [1.5]
 
 # create directory for output
 if not os.path.isdir('../results'):
@@ -235,7 +241,7 @@ for v0 in ext_rates:
 
             [PSTH_inh,selected_PSTHs_inh,avg_PSTH_inh,mean_FR_inh,
             avg_ISI_inh] = tools.PSTH(Simulation_params["simtime"],data_s[1],senders_s[1],
-                                    pop_in,sel_cells_in,PSTH_bin_size)
+                                    pop_in,sel_cells_inh,PSTH_bin_size)
 
             for k in range(len(PSTH_exc)):
                 all_PSTHs_exc[k] += PSTH_exc[k]
@@ -401,14 +407,6 @@ for v0 in ext_rates:
 
         print("Mean pairwise correlation of inh. cells = %s"%cc_inh)
 
-        # fig = plt.figure(figsize=[5,3], dpi=300)
-        #
-        # Vax = fig.add_axes([0.15,0.15,0.75,0.75],frameon=True)
-        # Vax.bar(bb[1:],hh/float(np.sum(hh)), width=bb[1]-bb[0])
-        # Vax.set_ylim([0.,1.])
-        # Vax.set_xlabel('Pairwise correlation')
-        # Vax.set_ylabel('Percentage of pairs')
-
         # Coeff. of variation of the ISI of exc. cells
         ISI = np.array([])
         for spike_times in all_spikes[0:len(pop_ex)]:
@@ -462,33 +460,32 @@ for v0 in ext_rates:
                                         '/'+filename+".analysis_IN", "wb"))
 
         # Raster plots of spikes
-        # fig = plt.figure(figsize=[8,6], dpi=300)
-        # Vax = fig.add_axes([0.15,0.15,0.8,0.8],frameon=True)
-        # for k in range(len(pop_ex) + len(pop_in)):
-        #
-        #     if k < len(pop_ex):
-        #         Vax.scatter(all_spikes[k],k*np.ones(len(all_spikes[k])),s=0.2,color='b',label = 'Exc.')
-        #     else:
-        #         Vax.scatter(all_spikes[k],k*np.ones(len(all_spikes[k])),s=0.2,color = 'r',label = 'Inh.')
-        #
-        # Vax.set_xlim([0.0,Simulation_params['simtime']])
-        # Vax.set_xlabel('Time (ms)')
-        # Vax.set_ylabel('Cell ID')
-        #
-        # # Dummy plot for the legend
-        # Vax = fig.add_axes([0.8,0.15,0.1,0.7],frameon=False)
-        # for k in range(2):
-        #     if k==0:
-        #         Vax.plot([],[],'o',color='b',label = 'Exc.')
-        #     else:
-        #         Vax.plot([],[],'o',color = 'r',label = 'Inh.')
-        #
-        # Vax.set_yticks([])
-        # Vax.set_xticks([])
-        # Vax.legend(loc='upper right')
+        fig = plt.figure(figsize=[8,6], dpi=300)
+        Vax = fig.add_axes([0.15,0.15,0.8,0.8],frameon=True)
+        for k in range(len(pop_ex) + len(pop_in)):
+            if k < len(pop_ex):
+                Vax.scatter(all_spikes[k],k*np.ones(len(all_spikes[k])),s=0.2,color='b',label = 'Exc.')
+            else:
+                Vax.scatter(all_spikes[k],k*np.ones(len(all_spikes[k])),s=0.2,color = 'r',label = 'Inh.')
+
+        Vax.set_xlim([0.0,Simulation_params['simtime']])
+        Vax.set_xlabel('Time (ms)')
+        Vax.set_ylabel('Cell ID')
+
+        # Dummy plot for the legend
+        Vax = fig.add_axes([0.8,0.15,0.1,0.7],frameon=False)
+        for k in range(2):
+            if k==0:
+                Vax.plot([],[],'o',color='b',label = 'Exc.')
+            else:
+                Vax.plot([],[],'o',color = 'r',label = 'Inh.')
+
+        Vax.set_yticks([])
+        Vax.set_xticks([])
+        Vax.legend(loc='upper right')
 
         # # Raster plots of spikes (NEST)
         # nest.raster_plot.from_device(mult_exc,hist=True,title="Exc.")
         # nest.raster_plot.from_device(mult_inh,hist=True,title="Inh.")
 
-        # plt.show()
+        plt.show()

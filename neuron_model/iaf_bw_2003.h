@@ -76,7 +76,7 @@ Sends: SpikeEvent
 Receives: SpikeEvent, CurrentEvent, DataLoggingRequest
 
 Author:
-Pablo Martinez-Canada, based on iaf_cond_beta
+Pablo Martinez-Canada (pablo.martinez@iit.it), based on iaf_cond_beta
 
 SeeAlso: iaf_cond_beta
 */

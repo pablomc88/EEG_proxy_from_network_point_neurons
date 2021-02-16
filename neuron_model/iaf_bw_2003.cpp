@@ -18,6 +18,8 @@
  *  You should have received a copy of the GNU General Public License
  *  along with NEST.  If not, see <http://www.gnu.org/licenses/>.
  *
+ * Author:
+ * Pablo Martinez-Canada (pablo.martinez@iit.it)
  */
 
 #include "iaf_bw_2003.h"

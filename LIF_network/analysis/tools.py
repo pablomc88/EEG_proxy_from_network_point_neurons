@@ -1,5 +1,13 @@
 # -*- coding: utf-8 -*-
 
+###############################################################################
+## Functions to analyze and plot results of the LIF model network.           ##
+##                                                                           ##
+## Author: Pablo Martinez Canada (pablo.martinez@iit.it)                     ##
+## Date: 15/02/2021                                                          ##
+###############################################################################
+
+
 import sys,os
 import numpy as np
 import scipy.stats
